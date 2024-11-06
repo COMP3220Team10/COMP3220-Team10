@@ -2,14 +2,72 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class WasteManagementSystem {
+    private static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) {
+        loginPage();
         mainMenu();
     }
 
+    // The login page
+    private static void loginPage(){
+            System.out.println("Hello! Please select one of the options below:");
+            System.out.println("1. Login");
+            System.out.println("2. Sign Up");
+            System.out.print("Please enter your selection: ");
+            
+            int loginSelection = -1;
+            try {
+                loginSelection = scanner.nextInt();
+                scanner.nextLine(); // Consume the newline
+
+                // Handle each login option
+                switch (loginSelection) {
+                    case 1:
+                        System.out.println("You selected: Login.");
+                        loginInfo();
+                        break;
+                    case 2:
+                        System.out.println("You selected: Sign Up.");
+                        signupInfo();
+                        break;
+                    default:
+                        System.out.println("Invalid choice. Please enter a number from 1 to 2.");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a number from 1 to 2.");
+                scanner.nextLine(); // Clear invalid input
+            }      
+    }
+    
+    private static void loginInfo() {
+        // Method for collecting login details
+        System.out.print("Enter Username: ");
+        String username = scanner.nextLine();
+        
+        System.out.print("Enter Password: ");
+        String password = scanner.nextLine();
+    }
+    
+    private static void signupInfo() {
+        // Method for collecting login details
+        System.out.print("Enter first name: ");
+        String firstName = scanner.nextLine();
+        
+        System.out.print("Enter last name: ");
+        String lastName = scanner.nextLine();
+        
+        System.out.print("Enter email address: ");
+        String emailAddress = scanner.nextLine();
+        
+        System.out.print("Enter Username: ");
+        String username = scanner.nextLine();
+        
+        System.out.print("Enter Password: ");
+        String password = scanner.nextLine();
+    }
+    
     // The main menu
     private static void mainMenu() {
-        Scanner scanner = new Scanner(System.in);
-
         while (true) { // Infinite loop to display the main menu
             // Display menu options
             System.out.println("\nHello! Welcome to the Drainage Request Management System!");
