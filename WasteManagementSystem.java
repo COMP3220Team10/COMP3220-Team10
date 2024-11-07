@@ -58,22 +58,22 @@ public class WasteManagementSystem {
         }
     }
 
-    private static void requestInformation() {
+    static void requestInformation() {
         // Placeholder method for requesting information
         System.out.println("Functionality to request information about an existing service request.");
     }
 
-    private static void fileNewRequest() {
+    static void fileNewRequest() {
         // Placeholder method for filing a new service request
         System.out.println("Functionality to file a new service request.");
     }
 
-    private static void viewRequestsInArea() {
+    static void viewRequestsInArea() {
         // Placeholder method to view drainage requests in a specific area
         System.out.println("Functionality to view drainage requests in a specific area.");
     }
 
-    private static void updateRequest() {
+    static void updateRequest() {
         // Placeholder method to update an existing request
         System.out.println("Functionality to update an existing drainage request.");
     }
