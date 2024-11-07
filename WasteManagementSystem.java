@@ -2,11 +2,72 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class WasteManagementSystem {
+    private static Scanner scanner = new Scanner(System.in);
+    public static void main(String[] args) {
+        loginPage();
+        mainMenu();
+    }
 
+    // The login page
+    private static void loginPage(){
+            System.out.println("Hello! Please select one of the options below:");
+            System.out.println("1. Login");
+            System.out.println("2. Sign Up");
+            System.out.print("Please enter your selection: ");
+            
+            int loginSelection = -1;
+            try {
+                loginSelection = scanner.nextInt();
+                scanner.nextLine(); // Consume the newline
+
+                // Handle each login option
+                switch (loginSelection) {
+                    case 1:
+                        System.out.println("You selected: Login.");
+                        loginInfo();
+                        break;
+                    case 2:
+                        System.out.println("You selected: Sign Up.");
+                        signupInfo();
+                        break;
+                    default:
+                        System.out.println("Invalid choice. Please enter a number from 1 to 2.");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a number from 1 to 2.");
+                scanner.nextLine(); // Clear invalid input
+            }      
+    }
+    
+    private static void loginInfo() {
+        // Method for collecting login details
+        System.out.print("Enter Username: ");
+        String username = scanner.nextLine();
+        
+        System.out.print("Enter Password: ");
+        String password = scanner.nextLine();
+    }
+    
+    private static void signupInfo() {
+        // Method for collecting login details
+        System.out.print("Enter first name: ");
+        String firstName = scanner.nextLine();
+        
+        System.out.print("Enter last name: ");
+        String lastName = scanner.nextLine();
+        
+        System.out.print("Enter email address: ");
+        String emailAddress = scanner.nextLine();
+        
+        System.out.print("Enter Username: ");
+        String username = scanner.nextLine();
+        
+        System.out.print("Enter Password: ");
+        String password = scanner.nextLine();
+    }
+    
     // The main menu
-    public static void mainMenu() {
-        Scanner scanner = new Scanner(System.in);
-
+    private static void mainMenu() {
         while (true) { // Infinite loop to display the main menu
             // Display menu options
             System.out.println("\nHello! Welcome to the Drainage Request Management System!");
@@ -55,24 +116,24 @@ public class WasteManagementSystem {
         }
     }
 
-    private static void requestInformation() {
+    static void requestInformation() {
         // Placeholder method for requesting information
         System.out.println("Functionality to request information about an existing service request.");
     }
 
-    private static void fileNewRequest() {
+    static void fileNewRequest() {
         // Placeholder method for filing a new service request
         System.out.println("Functionality to file a new service request.");
     }
 
-    private static void viewRequestsInArea() {
+    static void viewRequestsInArea() {
         // Placeholder method to view drainage requests in a specific area
         System.out.println("Functionality to view drainage requests in a specific area.");
         // Fill in the file path here
         Option3.viewRequestsInArea(Config.getCsvFilePath());
     }
 
-    private static void updateRequest() {
+    static void updateRequest() {
         // Placeholder method to update an existing request
         System.out.println("Functionality to update an existing drainage request.");
         Option4.updateDrainageRequest(Config.getCsvFilePath());
