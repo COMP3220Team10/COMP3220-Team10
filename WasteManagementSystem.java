@@ -129,10 +129,13 @@ public class WasteManagementSystem {
     static void viewRequestsInArea() {
         // Placeholder method to view drainage requests in a specific area
         System.out.println("Functionality to view drainage requests in a specific area.");
+        // Fill in the file path here
+        Option3.viewRequestsInArea(Config.getCsvFilePath());
     }
 
     static void updateRequest() {
         // Placeholder method to update an existing request
         System.out.println("Functionality to update an existing drainage request.");
+        Option4.updateDrainageRequest(Config.getCsvFilePath());
     }
 }
