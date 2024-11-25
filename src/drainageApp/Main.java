@@ -1,13 +1,13 @@
 package drainageApp;
 
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.GridLayout;
 
 public class Main extends JFrame {
 
@@ -30,41 +30,37 @@ public class Main extends JFrame {
 	public Main() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Home");
-		setBounds(100, 100, 611, 528);
+		setBounds(100, 100, 600, 400);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
 		
-		JButton btnNewButton = new JButton("upload");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnUploadButton = new JButton("upload");
+		btnUploadButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				contentPane.setVisible(false);
 				UploadFile newWindow = new UploadFile();
 				newWindow.setVisible(true);
 			}
 		});
-		btnNewButton.setBounds(10, 42, 564, 93);
-		contentPane.add(btnNewButton);
+		contentPane.setLayout(new GridLayout(0, 1, 0, 0));
+		contentPane.add(btnUploadButton);
 		
 		JButton btnDownoad = new JButton("downoad ");
 		btnDownoad.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				contentPane.setVisible(false);
-				SpecificPage newWindow = new SpecificPage();
+				Search newWindow = new Search();
 				newWindow.setVisible(true);
 			}
 		});
-		btnDownoad.setBounds(10, 156, 564, 93);
 		contentPane.add(btnDownoad);
 		
 		JButton btnDashboard = new JButton("dashboard");
-		btnDashboard.setBounds(10, 267, 564, 93);
 		contentPane.add(btnDashboard);
 		
 		JButton btnApi = new JButton("API");
-		btnApi.setBounds(10, 371, 564, 93);
 		contentPane.add(btnApi);
 	}
 

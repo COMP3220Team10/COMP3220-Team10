@@ -1,6 +1,7 @@
 package drainageApp;
 
 import java.awt.EventQueue;
+import java.awt.GridLayout;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,7 +14,6 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -26,28 +26,28 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
-
 import java.awt.BorderLayout;
-import java.awt.Cursor;
-
 import javax.swing.border.TitledBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
-import javax.swing.JList;
+import java.awt.Font;
 
-public class SpecificPage extends JFrame {
+
+
+public class DataPage extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private File predefinedFile;
 	private JPanel iconPanel;
+	private File selectedFile;
 
-	public SpecificPage() {
-		this.predefinedFile = new File("C:\\Users\\szq20\\OneDrive\\Desktop\\Drainage_YTD.csv");
+	public DataPage() {
+		List<File> files = FileConfig.getFiles();
+		selectedFile = files.isEmpty() ? null : files.get(0);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Display and Download Dataset");
-		setBounds(100, 100, 577, 385);
+		setBounds(100, 100, 600, 400);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -55,34 +55,41 @@ public class SpecificPage extends JFrame {
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
+		panel.setBounds(0, 0, 0, 0);
 		contentPane.add(panel);
 	
 		JPanel introPanel = new JPanel();
+		introPanel.setBounds(20, 11, 412, 147);
 		introPanel.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		introPanel.setBounds(20, 11, 412, 118);
 		contentPane.add(introPanel);
 		introPanel.setLayout(null);
 		
-		JLabel nameLabel = new JLabel("Drainage_YTD DataSet");
-		nameLabel.setBounds(10, 0, 166, 34);
+		JLabel nameLabel = new JLabel("Drainage_YTD");
+		nameLabel.setBounds(10, 0, 166, 23);
 		introPanel.add(nameLabel);
 		
-		JLabel sumLabel = new JLabel("This is a summary of the dataset");
-		sumLabel.setBounds(10, 45, 392, 65);
-		introPanel.add(sumLabel);
+		JPanel sumPanel = new JPanel();
+		sumPanel.setBounds(10, 27, 392, 109);
+		introPanel.add(sumPanel);
+		sumPanel.setLayout(null);
+		
+		JLabel sumLabel = new JLabel("<html>Maintenance pertaining to culvert/ditch drainage and odours.<br> The dataset contains information on customer initiated service requests<br> entered into the City of Windsor 311 system from various channels (phone, email, online self-serve, text, mobile app).<br>311 manages the service request data for City of Windsor departments and divisions represented in this dataset.<br>As such, 311 consulted the participating divisions and subject matter experts for this release. This data set is extracted electronically from the 311 customer request management system.</html>");
+		sumLabel.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		sumLabel.setBounds(0, -12, 392, 121);
+		sumPanel.add(sumLabel);
 		
 		JPanel desPanel = new JPanel();
+		desPanel.setBounds(20, 143, 187, 194);
 		desPanel.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		desPanel.setBounds(20, 128, 161, 209);
 		contentPane.add(desPanel);
 		desPanel.setLayout(null);
 		
 		JLabel desLable_1 = new JLabel("Last updated: Nov 20,2024");
-		desLable_1.setBounds(10, 26, 141, 14);
+		desLable_1.setBounds(10, 26, 177, 14);
 		desPanel.add(desLable_1);
 		
 		JLabel desLable_2 = new JLabel("Release Date: June 6, 2023");
-		desLable_2.setBounds(10, 63, 151, 14);
+		desLable_2.setBounds(10, 63, 177, 14);
 		desPanel.add(desLable_2);
 		
 		JLabel desLable_3 = new JLabel("Topic: Culvert");
@@ -94,12 +101,12 @@ public class SpecificPage extends JFrame {
 		desPanel.add(desLable_4);
 		
 		JLabel desLable_5 = new JLabel("Contact: windsor@gmail.com");
-		desLable_5.setBounds(10, 169, 165, 14);
+		desLable_5.setBounds(10, 169, 177, 14);
 		desPanel.add(desLable_5);
 		
 		JPanel apiPanel = new JPanel();
+		apiPanel.setBounds(190, 143, 242, 194);
 		apiPanel.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		apiPanel.setBounds(180, 128, 252, 209);
 		contentPane.add(apiPanel);
 		apiPanel.setLayout(null);
 		
@@ -109,24 +116,26 @@ public class SpecificPage extends JFrame {
 		
 		JTextArea txtrCodesHere = new JTextArea();
 		txtrCodesHere.setText("codes here");
-		txtrCodesHere.setBounds(10, 34, 232, 152);
+		txtrCodesHere.setBounds(29, 34, 194, 152);
 		apiPanel.add(txtrCodesHere);
 		
+		iconPanel = new JPanel();
+        iconPanel.setBounds(442, 0, 121, 103);
+        contentPane.add(iconPanel);
+		
 		JButton btnPreview = new JButton("preview");
-		btnPreview.setBounds(442, 106, 89, 23);
+		btnPreview.setBounds(454, 96, 89, 23);
 		contentPane.add(btnPreview);
 		
-		iconPanel = new JPanel();
-		iconPanel.setBounds(442, 25, 121, 67);
-		
-		JLabel iconLabel = new JLabel("predefinedFile.getName()");
+		JLabel iconLabel = new JLabel(selectedFile.getName());
 		iconLabel.setBounds(443, 11, 90, 91);
 		
 		JButton btnDownload = new JButton("download");
-		btnDownload.setBounds(442, 238, 89, 23);
+		btnDownload.setBounds(454, 234, 89, 23);
 		contentPane.add(btnDownload);
 		
 		JButton btnReturn = new JButton("return");
+		btnReturn.setBounds(454, 275, 89, 23);
 		btnReturn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				contentPane.setVisible(false);
@@ -134,7 +143,6 @@ public class SpecificPage extends JFrame {
 				newWindow.setVisible(true);
 			}
 		});
-		btnReturn.setBounds(442, 272, 89, 23);
 		contentPane.add(btnReturn);
 		
 		JLabel lblNewLabel = new JLabel("Select formats");
@@ -142,36 +150,37 @@ public class SpecificPage extends JFrame {
 		contentPane.add(lblNewLabel);
 
         JComboBox<String> formatComboBox = new JComboBox<>(new String[]{"CSV", "TXT", "XLSX"});
-        formatComboBox.setBounds(452, 164, 91, 23);
+        formatComboBox.setBounds(454, 165, 91, 23);
         contentPane.add(formatComboBox);
         
-        btnPreview.addActionListener(e -> displayCsvContent(predefinedFile));
+        btnPreview.addActionListener(e -> displayFileContent(selectedFile));
         btnDownload.addActionListener(e -> {
             String selectedFormat = (String) formatComboBox.getSelectedItem();
-            downloadFile(predefinedFile, selectedFormat);
+            downloadFile(selectedFile, selectedFormat);
         });
-    	addFileIcon(predefinedFile);
-
-        contentPane.add(iconPanel);
+    	addFileIcon(selectedFile);
+        
+        
+        iconPanel.setLayout(null);
+        JLabel fileIconLabel = new JLabel();
+        fileIconLabel.setBounds(0, 11, 110, 81);
+        iconPanel.add(fileIconLabel);
+        fileIconLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        fileIconLabel.setHorizontalTextPosition(SwingConstants.CENTER);
+        fileIconLabel.setIcon(UIManager.getIcon("FileView.fileIcon"));
+        fileIconLabel.setText(selectedFile.getName());
+        fileIconLabel.setVerticalTextPosition(SwingConstants.BOTTOM);
         contentPane.revalidate();
         contentPane.repaint();
 	}
 
 	private void addFileIcon(File file) {
-		iconPanel.setLayout(null);
-		JLabel fileIconLabel = new JLabel();
-		fileIconLabel.setBounds(10, 5, 101, 51);
-		fileIconLabel.setIcon(UIManager.getIcon("FileView.fileIcon"));
-		fileIconLabel.setText(file.getName());
-		fileIconLabel.setHorizontalTextPosition(SwingConstants.CENTER);
-		fileIconLabel.setVerticalTextPosition(SwingConstants.BOTTOM);
-		iconPanel.add(fileIconLabel);
 		iconPanel.revalidate();
 		iconPanel.repaint();
 	}
 
-    private void displayCsvContent(File file) {
-        JFrame displayFrame = new JFrame("CSV Viewer - " + file.getName());
+	private void displayFileContent(File file) {
+        JFrame displayFrame = new JFrame("File Viewer - " + file.getName());
         displayFrame.setSize(600, 400);
 
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
@@ -262,7 +271,7 @@ public class SpecificPage extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					SpecificPage frame = new SpecificPage();
+					DataPage frame = new DataPage();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();

@@ -2,10 +2,7 @@ package drainageApp;
 
 import java.awt.EventQueue;
 import javax.swing.*;
-import java.awt.*;
-
 import javax.swing.JFrame;
-import javax.swing.JTextField;
 import javax.swing.JTextArea;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -39,31 +36,31 @@ public class LoginForm {
 
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 536, 498);
+		frame.setBounds(100, 100, 600, 400);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setTitle("Login");
 		frame.getContentPane().setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Username:");
 		lblNewLabel.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 14));
-		lblNewLabel.setBounds(106, 154, 85, 14);
+		lblNewLabel.setBounds(154, 154, 85, 14);
 		frame.getContentPane().add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Password:");
 		lblNewLabel_1.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 14));
-		lblNewLabel_1.setBounds(106, 208, 85, 14);
+		lblNewLabel_1.setBounds(154, 208, 85, 14);
 		frame.getContentPane().add(lblNewLabel_1);
 		
 		JTextArea txtUser = new JTextArea();
 		txtUser.setBackground(Color.WHITE);
 		txtUser.setForeground(Color.BLACK);
-		txtUser.setBounds(201, 150, 120, 20);
+		txtUser.setBounds(286, 153, 120, 20);
 		txtUser.setBorder(null);
 		frame.getContentPane().add(txtUser);
 		
 		txtPass = new JPasswordField();
 		txtPass.setForeground(Color.BLACK);
-		txtPass.setBounds(201, 205, 120, 20);
+		txtPass.setBounds(286, 207, 120, 20);
 		txtPass.setBorder(null);
 		frame.getContentPane().add(txtPass);
 		
@@ -85,12 +82,12 @@ public class LoginForm {
 			}
 		});
 		btnLogin.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnLogin.setBounds(103, 313, 113, 37);
+		btnLogin.setBounds(154, 269, 113, 37);
 		frame.getContentPane().add(btnLogin);
 		
 		JLabel lblNewLabel_2 = new JLabel("Login Form");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblNewLabel_2.setBounds(172, 32, 215, 46);
+		lblNewLabel_2.setBounds(221, 46, 215, 46);
 		frame.getContentPane().add(lblNewLabel_2);
 		
 		JButton btnClose = new JButton("Close");
@@ -100,7 +97,7 @@ public class LoginForm {
 				frame.setVisible(false);				
 			}
 		});
-		btnClose.setBounds(247, 313, 113, 37);
+		btnClose.setBounds(331, 269, 113, 37);
 		frame.getContentPane().add(btnClose);
 	}
 }
