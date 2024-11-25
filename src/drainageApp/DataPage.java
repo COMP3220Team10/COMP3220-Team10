@@ -131,11 +131,11 @@ public class DataPage extends JFrame {
 		iconLabel.setBounds(443, 11, 90, 91);
 		
 		JButton btnDownload = new JButton("download");
-		btnDownload.setBounds(454, 234, 89, 23);
+		btnDownload.setBounds(454, 234, 95, 23);
 		contentPane.add(btnDownload);
 		
 		JButton btnReturn = new JButton("return");
-		btnReturn.setBounds(454, 275, 89, 23);
+		btnReturn.setBounds(454, 275, 95, 23);
 		btnReturn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				contentPane.setVisible(false);
