@@ -19,6 +19,8 @@ public class Search extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField;
 	private ArrayList<String> fileNamesList;
+	private JButton btnReturn;
+	private JButton btnExit;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -65,7 +67,22 @@ public class Search extends JFrame {
 			}
 		});
 		btnNewButton.setBounds(420, 47, 76, 32);
-		contentPane.add(btnNewButton);}
+		contentPane.add(btnNewButton);
+		
+		btnReturn = new JButton("Return");
+		btnReturn.setBounds(183, 291, 89, 23);
+		btnReturn.addActionListener(e -> {
+            contentPane.setVisible(false);
+            Main newWindow = new Main();
+            newWindow.setVisible(true);
+        });
+        contentPane.add(btnReturn);
+		
+        JButton btnExit = new JButton("Exit");
+        btnExit.setBounds(315, 291, 89, 23);
+        btnExit.addActionListener(e -> System.exit(0)); // Close the application
+        contentPane.add(btnExit);
+	}
 		
     private ArrayList<String> searchByFilename(String keyword) {
         ArrayList<String> results = new ArrayList<>();
@@ -118,5 +135,22 @@ public class Search extends JFrame {
 			contentPane.setVisible(false);
 			DataPage newWindow = new DataPage();
 			newWindow.setVisible(true);
-	}
-	}
+		}
+		private void addExitAndReturnButtons() {
+	        
+	        JButton btnExit = new JButton("Exit");
+	        btnExit.setBounds(454, 268, 95, 23);
+	        btnExit.addActionListener(e -> System.exit(0)); // Close the application
+	        contentPane.add(btnExit);
+	        
+	        JButton btnReturn = new JButton("Return");
+	        btnReturn.setBounds(454, 302, 95, 23);
+	        btnReturn.addActionListener(e -> {
+	            contentPane.setVisible(false);
+	            Main newWindow = new Main();
+	            newWindow.setVisible(true);
+	        });
+	        contentPane.add(btnReturn);
+	    }
+	
+}
