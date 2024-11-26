@@ -107,4 +107,11 @@ public class ServiceRequest {
 		submitButton.setBounds(173, 210, 89, 23);
 		frame.getContentPane().add(submitButton);
 	}
+
+	/**
+	 * Makes the Report window visible.
+	 */
+	public void setVisible(boolean isVisible) {
+		frame.setVisible(isVisible);
+	}
 }

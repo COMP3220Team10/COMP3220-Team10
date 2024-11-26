@@ -40,7 +40,12 @@ public class Report {
 	public Report() {
 		initialize();
 	}
-
+	/**
+	 * Makes the Report window visible.
+	 */
+	public void setVisible(boolean isVisible) {
+		frame.setVisible(isVisible);
+	}
 	/**
 	 * Initialize the contents of the frame.
 	 */

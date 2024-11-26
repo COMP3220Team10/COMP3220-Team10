@@ -53,4 +53,3 @@ public class SearcherRequest {
         return results.toString();
     }
 }
-
