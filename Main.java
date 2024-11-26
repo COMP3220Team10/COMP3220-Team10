@@ -1,19 +1,19 @@
-import java.awt.EventQueue;
+import java.awt.*;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import java.awt.event.ActionListener;
-import java.awt.GridLayout;
 
 public class Main extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
-    // This will be the main entry of the whole program
+
     public static void main(String[] args) {
         EventQueue.invokeLater(() -> {
             try {
-                Main frame = new Main();
-                frame.setVisible(true);
+                // Start with the Login Page
+                LoginForm loginPage = new LoginForm();
+                loginPage.showLogin();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -33,7 +33,6 @@ public class Main extends JFrame {
         setContentPane(contentPane);
 
         // Add buttons with their action listeners:
-
         addButton("Upload", e -> {
             contentPane.setVisible(false);
             UploadFile newWindow = new UploadFile();
@@ -57,7 +56,7 @@ public class Main extends JFrame {
             Search newWindow = new Search();
             newWindow.setVisible(true);
         });
-        
+
         addButton("Track Service Request", e -> {
             contentPane.setVisible(false);
             ServiceRequestTrackingPage newWindow = new ServiceRequestTrackingPage();
