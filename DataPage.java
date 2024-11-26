@@ -1,14 +1,8 @@
-/*
- * Notes to self: This file is in charge of 
- * */
- 
-import java.awt.*;
-import java.awt.event.*;
-import java.io.*;
-import java.util.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
+import java.awt.*;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,13 +15,13 @@ public class DataPage extends JFrame {
 
     public DataPage() {
         // Initialize selected file
-        List<File> files = FileConfig.getFiles(); 
+        List<File> files = FileConfig.getFiles(); // Assuming FileConfig.getFiles() is implemented
         selectedFile = files.isEmpty() ? null : files.get(0);
 
         // Set up frame properties
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Display and Download Dataset");
-        setBounds(100, 100, 600, 400);
+        setBounds(100, 100, 600, 450); // Increased height for buttons
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
@@ -44,6 +38,9 @@ public class DataPage extends JFrame {
 
         // File Preview and Icon
         addFilePreviewPanel();
+
+        // Add Exit and Return Buttons
+        addExitAndReturnButtons();
 
         // Refresh the layout
         contentPane.revalidate();
@@ -145,6 +142,23 @@ public class DataPage extends JFrame {
         iconPanel.add(fileIconLabel);
     }
 
+    private void addExitAndReturnButtons() {
+        
+        JButton btnExit = new JButton("Exit");
+        btnExit.setBounds(454, 268, 95, 23);
+        btnExit.addActionListener(e -> System.exit(0)); // Close the application
+        contentPane.add(btnExit);
+        
+        JButton btnReturn = new JButton("Return");
+        btnReturn.setBounds(454, 302, 95, 23);
+        btnReturn.addActionListener(e -> {
+            contentPane.setVisible(false);
+            Main newWindow = new Main();
+            newWindow.setVisible(true);
+        });
+        contentPane.add(btnReturn);
+    }
+
     private void displayFileContent(File file) {
         JFrame displayFrame = new JFrame("File Viewer - " + file.getName());
         displayFrame.setSize(600, 400);
@@ -165,7 +179,7 @@ public class DataPage extends JFrame {
 
             if (columnNames != null) {
                 JTable table = new JTable(data.toArray(new String[0][]), columnNames);
-                displayFrame.add(new JScrollPane(table), BorderLayout.CENTER);
+                displayFrame.getContentPane().add(new JScrollPane(table), BorderLayout.CENTER);
             }
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Error reading file: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -223,14 +237,4 @@ public class DataPage extends JFrame {
         }
     }
 
-    public static void main(String[] args) {
-        EventQueue.invokeLater(() -> {
-            try {
-                DataPage frame = new DataPage();
-                frame.setVisible(true);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
-    }
 }
