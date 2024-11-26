@@ -13,6 +13,7 @@ public class UploadFile extends JFrame {
     private JPanel uploadedFilePanel;
     private JPanel buttonPanel;
     private List<File> uploadedFiles;
+    private JButton btnExit;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(() -> {
@@ -30,7 +31,7 @@ public class UploadFile extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Upload Dataset");
         setBounds(100, 100, 547, 390);
-        setLayout(new BorderLayout());
+        getContentPane().setLayout(new BorderLayout());
 
         // Main content pane
         contentPane = new JPanel();
@@ -51,7 +52,8 @@ public class UploadFile extends JFrame {
     private void addUploadedFilePanel() {
         uploadedFilePanel = new JPanel();
         uploadedFilePanel.setBounds(31, 31, 462, 183);
-        uploadedFilePanel.setLayout(new GridLayout(0, 4, 10, 10)); // Grid layout for file icons
+        // Grid layout for file icons
+        uploadedFilePanel.setLayout(new GridLayout(0, 4, 10, 10)); 
         contentPane.add(uploadedFilePanel);
 
         JLabel lblUploadedFiles = new JLabel("Uploaded files:");
@@ -67,31 +69,38 @@ public class UploadFile extends JFrame {
 
         // Upload Button
         JButton btnUpload = new JButton("Upload File");
-        btnUpload.setBounds(62, 11, 108, 29);
+        btnUpload.setBounds(174, 11, 108, 29);
         btnUpload.addActionListener(e -> uploadFiles());
         buttonPanel.add(btnUpload);
 
         // Return Button
         JButton btnReturn = new JButton("Return");
-        btnReturn.setBounds(292, 11, 108, 29);
+        btnReturn.setBounds(43, 11, 108, 29);
         btnReturn.addActionListener(e -> {
             contentPane.setVisible(false);
-            Main newWindow = new Main(); // Assuming Main is another class in your project
+            Main newWindow = new Main();
             newWindow.setVisible(true);
         });
         buttonPanel.add(btnReturn);
+        
+        btnExit = new JButton("Exit");
+        btnExit.setBounds(317, 11, 108, 29);
+        btnExit.addActionListener(e -> System.exit(0)); // Close the application
+        buttonPanel.add(btnExit);
     }
 
     private void uploadFiles() {
         JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setMultiSelectionEnabled(true); // Allow multiple file selection
+        // Allow multiple file selection
+        fileChooser.setMultiSelectionEnabled(true); 
         int returnValue = fileChooser.showOpenDialog(this);
 
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             File[] selectedFiles = fileChooser.getSelectedFiles();
             for (File file : selectedFiles) {
                 if (!uploadedFiles.contains(file)) {
-                    uploadedFiles.add(file); // Add file to the list if not already uploaded
+                	// Add file to the list if not already uploaded
+                    uploadedFiles.add(file); 
                     addFileIcon(file);
                 }
             }
@@ -100,14 +109,16 @@ public class UploadFile extends JFrame {
 
     private void addFileIcon(File file) {
         JLabel fileIconLabel = new JLabel();
-        fileIconLabel.setIcon(UIManager.getIcon("FileView.fileIcon")); // Default file icon
+        // Default file icon
+        fileIconLabel.setIcon(UIManager.getIcon("FileView.fileIcon")); 
         fileIconLabel.setText(file.getName());
         fileIconLabel.setHorizontalTextPosition(SwingConstants.CENTER);
         fileIconLabel.setVerticalTextPosition(SwingConstants.BOTTOM);
-        fileIconLabel.setCursor(new Cursor(Cursor.HAND_CURSOR)); // Hand cursor for file icons
-
+        // Hand cursor for file icons
+        fileIconLabel.setCursor(new Cursor(Cursor.HAND_CURSOR)); 
+        // Refresh panel to display new icons
         uploadedFilePanel.add(fileIconLabel);
-        uploadedFilePanel.revalidate(); // Refresh panel to display new icons
+        uploadedFilePanel.revalidate(); 
         uploadedFilePanel.repaint();
     }
 }
