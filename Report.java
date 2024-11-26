@@ -106,7 +106,21 @@ public class Report {
 				}
 			}
 		});
-		submitButton.setBounds(169, 227, 89, 23);
+		submitButton.setBounds(181, 214, 89, 23);
 		frame.getContentPane().add(submitButton);
+		
+		JButton btnReturn = new JButton("Return");
+		btnReturn.setBounds(56, 214, 89, 23);
+		btnReturn.addActionListener(e -> {
+            frame.getContentPane().setVisible(false);
+            Main newWindow = new Main();
+            newWindow.setVisible(true);
+        });
+		frame.getContentPane().add(btnReturn);
+		
+		JButton btnExit = new JButton("Exit");
+		btnExit.setBounds(295, 214, 89, 23);
+		btnExit.addActionListener(e -> System.exit(0)); // Close the application
+		frame.getContentPane().add(btnExit);
 	}
 }
