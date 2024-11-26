@@ -106,6 +106,20 @@ public class ServiceRequest {
 		});
 		submitButton.setBounds(173, 210, 89, 23);
 		frame.getContentPane().add(submitButton);
+		
+		JButton btnReturn = new JButton("Return");
+		btnReturn.setBounds(36, 210, 89, 23);
+		btnReturn.addActionListener(e -> {
+            frame.getContentPane().setVisible(false);
+            Main newWindow = new Main();
+            newWindow.setVisible(true);
+        });
+		frame.getContentPane().add(btnReturn);
+		
+		JButton btnExit = new JButton("Exit");
+		btnExit.setBounds(312, 210, 89, 23);
+		btnExit.addActionListener(e -> System.exit(0)); // Close the application
+        frame.getContentPane().add(btnExit);
 	}
 
 	/**
