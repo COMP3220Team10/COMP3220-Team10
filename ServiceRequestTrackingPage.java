@@ -1,65 +1,47 @@
-import java.awt.*;
-import java.awt.event.*;
-import java.io.*;
-import java.util.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-
-class MainMenuFrame extends JFrame {
-
-    public MainMenuFrame() {
-        setTitle("Service Request System");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(300, 200, 400, 200);
-
-        JPanel contentPane = new JPanel();
-        contentPane.setLayout(new GridLayout(3, 1, 10, 10));
-        setContentPane(contentPane);
-
-        JLabel welcomeLabel = new JLabel("Welcome to the Service Request System", SwingConstants.CENTER);
-        welcomeLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
-        contentPane.add(welcomeLabel);
-
-        JButton trackServiceButton = new JButton("Track Service");
-        contentPane.add(trackServiceButton);
-        trackServiceButton.addActionListener(e -> {
-            ServiceRequestTrackingPage trackingPage = new ServiceRequestTrackingPage();
-            trackingPage.setVisible(true);
-            dispose(); // Close the main menu
-        });
-
-        JButton exitButton = new JButton("Exit");
-        contentPane.add(exitButton);
-        exitButton.addActionListener(e -> System.exit(0));
-    }
-}
 
 public class ServiceRequestTrackingPage extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
-    private JTextField searchTextField;
     private JTable resultTable;
     private DefaultTableModel tableModel;
+    private JTextField searchTextField;
 
     public ServiceRequestTrackingPage() {
-        setTitle("Track Service Request");
+        // Frame setup
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setTitle("Track Service Request");
         setBounds(100, 100, 800, 600);
+        getContentPane().setLayout(new BorderLayout());
 
+        // Main content pane
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
+        // Initialize components
+        addTitleLabel();
+        addSearchPanel();
+        addResultTable();
+        addButtonPanel();
+    }
+
+    private void addTitleLabel() {
         JLabel titleLabel = new JLabel("Service Request Tracking and Status");
         titleLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
         titleLabel.setBounds(220, 11, 400, 30);
         contentPane.add(titleLabel);
+    }
 
+    private void addSearchPanel() {
         JLabel searchLabel = new JLabel("Enter Street Name:");
         searchLabel.setBounds(30, 60, 150, 25);
         contentPane.add(searchLabel);
@@ -67,49 +49,57 @@ public class ServiceRequestTrackingPage extends JFrame {
         searchTextField = new JTextField();
         searchTextField.setBounds(180, 60, 400, 25);
         contentPane.add(searchTextField);
-        searchTextField.setColumns(10);
 
         JButton searchButton = new JButton("Search");
         searchButton.setBounds(600, 60, 100, 25);
+        searchButton.addActionListener(e -> performSearch());
         contentPane.add(searchButton);
+    }
 
+    private void addResultTable() {
         JScrollPane scrollPane = new JScrollPane();
-        scrollPane.setBounds(30, 100, 720, 400);
+        scrollPane.setBounds(40, 98, 682, 344);
         contentPane.add(scrollPane);
 
         resultTable = new JTable();
-        tableModel = new DefaultTableModel(new Object[]{"Description", "Department", "Block/Address", "Street", "Ward", "Received By", "Created Date"}, 0);
+        tableModel = new DefaultTableModel(
+                new Object[]{"Description", "Department", "Block/Address", "Street", "Ward", "Received By", "Created Date"},
+                0
+        );
         resultTable.setModel(tableModel);
         scrollPane.setViewportView(resultTable);
+    }
 
-        JLabel statusLabel = new JLabel("");
-        statusLabel.setBounds(30, 520, 400, 25);
-        contentPane.add(statusLabel);
+    private void addButtonPanel() {
 
-        JButton backButton = new JButton("Back");
-        backButton.setBounds(650, 520, 100, 25);
-        contentPane.add(backButton);
-        backButton.addActionListener(e -> {
-            MainMenuFrame mainMenu = new MainMenuFrame();
-            mainMenu.setVisible(true);
-            dispose();
-        });
+        JButton btnExit = new JButton("Exit");
+        btnExit.setBounds(403, 468, 150, 25);
+        contentPane.add(btnExit);
+        
+                JButton btnReturn = new JButton("Return");
+                btnReturn.setBounds(177, 468, 144, 25);
+                contentPane.add(btnReturn);
+                btnReturn.addActionListener(e -> {
+                    dispose(); // Close the current frame
+                    Main newWindow = new Main(); // Navigate back to Main
+                    newWindow.setVisible(true);
+                });
+        btnExit.addActionListener(e -> System.exit(0));
+    }
 
-        searchButton.addActionListener(e -> {
-            String streetName = searchTextField.getText().trim();
-            if (!streetName.isEmpty()) {
-                boolean resultsFound = loadResults(streetName);
-                if (resultsFound) {
-                    JOptionPane.showMessageDialog(null, "Your service request has been approved. Status: Pending...");
-                    statusLabel.setText("Status: Pending...");
-                } else {
-                    JOptionPane.showMessageDialog(null, "No matching records found for the entered street name.");
-                    statusLabel.setText(""); // Clear the status label
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "Please enter a street name to search.");
-            }
-        });
+    private void performSearch() {
+        String streetName = searchTextField.getText().trim();
+        if (streetName.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter a street name to search.");
+            return;
+        }
+
+        boolean resultsFound = loadResults(streetName);
+        if (resultsFound) {
+            JOptionPane.showMessageDialog(this, "Your service request has been approved. Status: Pending...");
+        } else {
+            JOptionPane.showMessageDialog(this, "No matching records found for the entered street name.");
+        }
     }
 
     private boolean loadResults(String streetName) {
@@ -127,11 +117,11 @@ public class ServiceRequestTrackingPage extends JFrame {
                 String[] data = parseCSVLine(line);
                 if (data.length > 3 && data[3].equalsIgnoreCase(streetName)) {
                     tableModel.addRow(data);
-                    foundResults = true; // Mark that a matching result was found
+                    foundResults = true;
                 }
             }
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Error reading CSV file: " + e.getMessage());
+            JOptionPane.showMessageDialog(this, "Error reading CSV file: " + e.getMessage());
         }
 
         return foundResults;
