@@ -2,6 +2,12 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+/**
+ * This class represents the main entry of SearcherRequest.
+ * With this piece of code it runs through the CSV file searching for a specific streetname. Once found it'll generate its elements
+ * @author Murtaza Ahmed 
+ * @since 2024-11-25
+ */
 public class SearcherRequest {
 
     /**
@@ -9,13 +15,14 @@ public class SearcherRequest {
      * @param filePath Path to the CSV file.
      * @param streetName Street name to search for.
      * @return Results of the search as a formatted string.
+     * @throws IOException if file cannot be read.
      */
     public String searchByStreet(String filePath, String streetName) {
         StringBuilder results = new StringBuilder();
         boolean found = false;
-
+        //Implement the componenets that associate under the CSV file
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-            String line = reader.readLine(); // Read the header line
+            String line = reader.readLine();
             while ((line = reader.readLine()) != null) {
                 String[] fields = line.split(",");
                 if (fields.length >= 7) {
@@ -42,10 +49,11 @@ public class SearcherRequest {
                     }
                 }
             }
-
+            //If user inputs a wrong input, display no drainage request found for the specified street
             if (!found) {
                 results.append("No drainage requests found for the specified street.");
             }
+        //Throws IOException if file cannot be read
         } catch (IOException ex) {
             results.append("Error reading the file: ").append(ex.getMessage());
         }
@@ -53,3 +61,5 @@ public class SearcherRequest {
         return results.toString();
     }
 }
+
+
