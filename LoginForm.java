@@ -3,8 +3,10 @@ import javax.swing.*;
 import java.awt.event.ActionListener;
 
 public class LoginForm {
-
+	
+	// Main frame for the login page
     private JFrame frame;
+    // Set up the variables for username and password
     private JTextArea txtUser;
     private JPasswordField txtPass;
 
@@ -20,10 +22,12 @@ public class LoginForm {
         });
     }
 
+    // Constructor to initialize the login form
     public LoginForm() {
         initialize();
     }
 
+    // Setup the frame
     private void initialize() {
         setupFrame();
         setupTitle();
@@ -31,6 +35,7 @@ public class LoginForm {
         setupButtons();
     }
 
+    // Setup main frame properties
     private void setupFrame() {
         frame = new JFrame();
         frame.setBounds(100, 100, 600, 400);
@@ -38,7 +43,8 @@ public class LoginForm {
         frame.setTitle("Login");
         frame.getContentPane().setLayout(null);
     }
-
+    
+    // Add a title label to the frame declaring it the login form
     private void setupTitle() {
         JLabel lblTitle = new JLabel("Login Form");
         lblTitle.setFont(new Font("Tahoma", Font.PLAIN, 24));
@@ -46,6 +52,7 @@ public class LoginForm {
         frame.getContentPane().add(lblTitle);
     }
 
+    // Add the fields username and password to the frame
     private void setupFormFields() {
         JLabel lblUsername = new JLabel("Username:");
         lblUsername.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 14));
@@ -70,7 +77,8 @@ public class LoginForm {
         txtPass.setBorder(BorderFactory.createLineBorder(Color.GRAY));
         frame.getContentPane().add(txtPass);
     }
-
+    
+    // The login and close buttons are here
     private void setupButtons() {
         JButton btnLogin = new JButton("Login");
         btnLogin.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -84,7 +92,8 @@ public class LoginForm {
         btnClose.addActionListener(e -> frame.dispose());
         frame.getContentPane().add(btnClose);
     }
-
+    
+    // This will handle the login actions (password and username checks etc.)
     private void handleLogin() {
         String uname = txtUser.getText();
         String pass = String.valueOf(txtPass.getPassword());
