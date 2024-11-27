@@ -19,22 +19,6 @@ public class ServiceRequest {
 	private JTextField addrtextField_2;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ServiceRequest window = new ServiceRequest();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the application.
 	 */
 	public ServiceRequest() {
@@ -89,6 +73,7 @@ public class ServiceRequest {
 		addrtextField_2.setBounds(140, 163, 155, 20);
 		frame.getContentPane().add(addrtextField_2);
 		
+		// In the next iteration, this should have functionality to store to a database 
 		JButton submitButton = new JButton("Submit");
 		submitButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
