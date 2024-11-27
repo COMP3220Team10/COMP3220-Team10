@@ -80,9 +80,10 @@ public class ServiceRequest {
 		JButton submitButton = new JButton("Submit");
 		submitButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				//date, addr variables are created for date input and address input
 				String date = datetextField.getText();
 				String addr = addrtextField_2.getText();
-				
+				//if one of the text fields is empty, the Message Dialog prompt is out for fail notification.Otherwise, the message dialog prompt is out for success notice. 
 				if (date.isBlank() || addr.isBlank()) {
 					JOptionPane.showMessageDialog(frame, "Please fill all the blanks.");
 				}
@@ -94,7 +95,7 @@ public class ServiceRequest {
 		});
 		submitButton.setBounds(173, 210, 89, 23);
 		frame.getContentPane().add(submitButton);
-		
+		// button for return 
 		JButton btnReturn = new JButton("Return");
 		btnReturn.setBounds(36, 210, 89, 23);
 		btnReturn.addActionListener(e -> {
@@ -103,7 +104,7 @@ public class ServiceRequest {
             newWindow.setVisible(true);
         });
 		frame.getContentPane().add(btnReturn);
-		
+		// button for exit the application
 		JButton btnExit = new JButton("Exit");
 		btnExit.setBounds(312, 210, 89, 23);
 		btnExit.addActionListener(e -> System.exit(0)); // Close the application
