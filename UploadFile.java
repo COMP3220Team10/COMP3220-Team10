@@ -5,6 +5,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+// This is the frame to upload a file to the system (to be implemented in Phase 4)
 public class UploadFile extends JFrame {
 
     private static final long serialVersionUID = 1L;
@@ -15,19 +16,9 @@ public class UploadFile extends JFrame {
     private List<File> uploadedFiles;
     private JButton btnExit;
 
-    public static void main(String[] args) {
-        EventQueue.invokeLater(() -> {
-            try {
-                UploadFile frame = new UploadFile();
-                frame.setVisible(true);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
-    }
 
     public UploadFile() {
-        // Frame setup
+        // Set the frame up
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Upload Dataset");
         setBounds(100, 100, 547, 390);
@@ -48,6 +39,7 @@ public class UploadFile extends JFrame {
         // Panel for action buttons
         addButtonPanel();
     }
+
 
     private void addUploadedFilePanel() {
         uploadedFilePanel = new JPanel();
@@ -83,12 +75,14 @@ public class UploadFile extends JFrame {
         });
         buttonPanel.add(btnReturn);
         
+        // Exit button
         btnExit = new JButton("Exit");
         btnExit.setBounds(317, 11, 108, 29);
         btnExit.addActionListener(e -> System.exit(0)); // Close the application
         buttonPanel.add(btnExit);
     }
 
+    // This will handle the file upload process
     private void uploadFiles() {
         JFileChooser fileChooser = new JFileChooser();
         // Allow multiple file selection
@@ -106,7 +100,8 @@ public class UploadFile extends JFrame {
             }
         }
     }
-
+    
+    // This will display the icon for the uploaded file in the uploaded file panel
     private void addFileIcon(File file) {
         JLabel fileIconLabel = new JLabel();
         // Default file icon
