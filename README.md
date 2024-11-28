@@ -1,7 +1,18 @@
-This is the project code for COMP 3220 at University of Windsor, with Professor Kobti.
-The project implements a command line interface for users to interact with.
-The purpose of this project is to create a tool for users to view/update drainage requests in
-the City of Windsor.
-The solution is implemented in Java.
+A physical sequential text file is comma delimited with a number of fields, either String, Date, int, or double types 
+in any combination
 
-To check on UML diagrams: go to branch "UML-Diagrams"
+A record is an instance of one row or line in the file, a record has a list of fields 
+
+A recordList is a list of records in memory 
+
+A recordViewer is abstract, allowing the recordList to be viewed and edited 
+
+A graphic_recordViewer is a GUI Panel to view/edit a record
+
+A console_recordViewer is a menu driven viewer/editor of a record
+
+A fileManager contains a recordList and assigns a recordViewer
+
+A fileApplication controls the actions of a fileManager, initializes and controls the flow of the fileManager
+
+main instantiates a fileApplication and starts it with a special config. 
