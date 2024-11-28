@@ -35,6 +35,6 @@ An option3 is a filter to display requests based on area input.
 
 An option4 is a frame to update existing service requests.
 
-a WasteManagementSystem is an initial iteration of the application concept.
+A WasteManagementSystem is an initial iteration of the application concept.
 
 main is the application's entry point, controlling what frame is opened and when.
